@@ -1,0 +1,40 @@
+#game {
+  padding: 2.5rem;
+}
+
+#game-question {
+  color: #56a5ea;
+  cursor: default;
+}
+
+/* input[type="radio"] {
+  display: none;
+} */
+
+.game-choices {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  cursor: pointer;
+  background-color: white;
+  height: auto;
+  width: 58rem;
+  margin: 1rem auto;
+  gap: 1rem;
+}
+
+.choices-prefix {
+  height: 100%;
+  background-color: #56a5eb;
+  color: white;
+  padding: 1rem 1.5rem;
+  font-size: 12pt;
+  overflow: hidden;
+}
+
+.choices-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: small;
+}
