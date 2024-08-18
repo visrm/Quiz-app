@@ -1,15 +1,17 @@
 #game {
-  padding: 2.5rem;
+  padding: 2rem;
 }
 
 #game-question {
   color: #56a5ea;
+  padding: 0.25rem;
   cursor: default;
+  width: 100%;
 }
 
-/* input[type="radio"] {
+input[type="radio"] {
   display: none;
-} */
+}
 
 .game-choices {
   display: flex;
@@ -18,9 +20,12 @@
   cursor: pointer;
   background-color: white;
   height: auto;
-  width: 58rem;
+  width: 100%;
+  max-width: 60rem;
   margin: 1rem auto;
   gap: 1rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
 }
 
 .choices-prefix {
@@ -37,4 +42,9 @@
   justify-content: flex-start;
   align-items: center;
   font-size: small;
+}
+
+input:checked + label .game-choices {
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
