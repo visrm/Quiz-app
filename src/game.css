@@ -1,12 +1,17 @@
 #game {
-  padding: 2rem;
+  position: relative;
+  padding: 1rem;
 }
 
 #game-question {
   color: #56a5ea;
   padding: 0.25rem;
+  margin-bottom: 1rem;
   cursor: default;
-  width: 100%;
+  min-height: 6.5rem;
+  height: auto;
+  width: 67rem;
+  max-width: 100%;
 }
 
 input[type="radio"] {
@@ -20,9 +25,9 @@ input[type="radio"] {
   cursor: pointer;
   background-color: white;
   height: auto;
-  width: 100%;
-  max-width: 60rem;
-  margin: 1rem auto;
+  width: 60rem;
+  max-width: 100%;
+  margin: 1rem 0.75rem;
   gap: 1rem;
   border-radius: 0.25rem;
   overflow: hidden;
@@ -47,4 +52,17 @@ input[type="radio"] {
 input:checked + label .game-choices {
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+
+.submit-btn {
+  color: #56a5ea;
+  background-color: rgb(255, 255, 255, 1);
+  border: 1px solid #56a5ea;
+  border-radius: 0.25rem;
+  margin: 0.25rem 0.75rem;
+  padding: 0.25rem 0.75rem;
+}
+
+.submit-btn:hover {
+  background-color: rgb(255, 255, 255, 0.5);
 }
