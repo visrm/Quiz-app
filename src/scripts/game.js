@@ -38,7 +38,12 @@ async function getData() {
 
 getData().then(
   (res) => {
-    let i = 0;
+    // CONSTANTS
+    const CORRECT_BONUS = 5;
+    const MAX_QUESTIONS = 12;
+
+    let i = 0,
+      score = 0;
     let question = document.querySelector("#game-question");
     const choices = document.querySelectorAll(".choices-text");
     const submit = document.querySelector(".submit-btn");
@@ -50,19 +55,21 @@ getData().then(
         j++;
       });
     }
+
     submit.addEventListener("click", () => {
-      i++;
-      do {
-        question.innerHTML = `${i + 1}. ${res.questions[i]}`;
-        let answerObj = res.answers[i];
-        for (let j = 0; j < 4; j++) {
-          choices.forEach((choice) => {
-            choice.innerHTML = answerObj[j];
-            j++;
-          });
-        }
-      } while (i < 1);
-      console.log(`question number : ${i}`);
+      if (i < MAX_QUESTIONS - 1) {
+        i++;
+        do {
+          question.innerHTML = `${i + 1}. ${res.questions[i]}`;
+          let answerObj = res.answers[i];
+          for (let j = 0; j < 4; j++) {
+            choices.forEach((choice) => {
+              choice.innerHTML = answerObj[j];
+              j++;
+            });
+          }
+        } while (i < 1);
+      }
     });
   },
   (err) => console.log(err)
