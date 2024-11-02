@@ -24,20 +24,20 @@ async function getData() {
   }
 
   for (let qnIndex = 0; qnIndex < quiz.length; qnIndex++) {
-    let choices = [];
+    let availableChoices = [];
 
     const qns = quiz[qnIndex];
-    let crect = qns.correct_answer;
-    let increct = qns.incorrect_answers;
-    correct.push(crect); // update "correct" array.
-    choices.push(crect);
+    let correctAns = qns.correct_answer;
+    let incorrectAns = qns.incorrect_answers;
 
-    for (let i = 0; i < increct.length; i++) {
-      choices.push(increct[i]);
+    correct.push(correctAns); // update "correct" array.
+    availableChoices.push(correctAns);
+
+    for (let i = 0; i < incorrectAns.length; i++) {
+      availableChoices.push(incorrectAns[i]);
     }
-
-    choices = Object.assign({}, choices);
-    answers.push(choices); // update "answers" array.
+    availableChoices = Object.assign({}, availableChoices);
+    answers.push(availableChoices); // update "answers" array.
   }
 
   return { questions, answers, correct };
@@ -52,13 +52,14 @@ data.then(
 
     let selectedChoice = [];
     let i = 0,
-      score = 0;
+      scoreCount = 0;
     let question = document.querySelector("#game-question");
     const game = document.querySelector("#game");
     const radios = document.querySelectorAll(".choice-radio");
     const choices = document.querySelectorAll(".choices-text");
     const radioChoices = document.getElementsByName("question-choice");
     const submit = document.querySelector(".submit-btn");
+    const score = document.querySelector("#score");
 
     question.innerHTML = `${i + 1}. ${res.questions[0]}`;
     let answerObj = res.answers[0];
@@ -88,14 +89,27 @@ data.then(
     // To prevent page-refresh on submit of each answer choice.
     game.addEventListener("submit", (event) => {
       event.preventDefault();
-
+      var scoreCard = document.querySelector("#score-card");
       if (selectedChoice && selectedChoice.length >= 0) {
         if (selectedChoice.length == 0)
           selectedChoice.push(radioChoices[0].value); // set default value of default selected radio button
         let chosenSelection =
           selectedChoice[selectedChoice.length - 1].toString();
         if (chosenSelection == res.correct[i]) {
-          score += CORRECT_BONUS;
+          scoreCount += CORRECT_BONUS;
+          while (scoreCount <= MAX_QUESTIONS * CORRECT_BONUS) {
+            score.style.color = "#66cc22";
+            scoreCard.setAttribute(
+              "style",
+              "transform: scale(1.1);"
+            );
+            score.innerHTML = scoreCount;
+            setTimeout(() => {
+              score.style.color = "";
+              scoreCard.setAttribute("style", "");
+            }, 1000);
+            break;
+          }
           // for test purpose :
           // console.info(`Correct Answer! Your score is now : ${score}`);
         } else {
@@ -103,7 +117,7 @@ data.then(
           // console.info(
           //   `Your choice: ${chosenSelection}, The Correct Answer is: ${res.correct[i]}`
           // );
-          score += 0;
+          scoreCount += 0;
         }
       } else {
         window.alert("Select your answer");

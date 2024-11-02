@@ -61,8 +61,28 @@ input:checked + label .game-choices {
   border-radius: 0.25rem;
   margin: 0.25rem 0.75rem;
   padding: 0.25rem 0.75rem;
+  font-size: 1.5rem;
+
+  &:hover {
+    background-color: rgb(255, 255, 255, 0.5);
+  }
 }
 
-.submit-btn:hover {
-  background-color: rgb(255, 255, 255, 0.5);
+#score-card {
+  display: flex;
+  min-height: auto;
+  min-width: fit-content;
+  padding: 0.5rem 1.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: all 300ms ease-in-out;
+
+  & h2 {
+    color: #56a5ea;
+    margin-bottom: 0;
+  }
 }
