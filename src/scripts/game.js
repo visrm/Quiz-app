@@ -12,26 +12,31 @@ async function fetchQuiz() {
 // Promise function to extract the questions & answer choices from the quiz-api to make a new object { questions, answers }
 async function getData() {
   const quiz = await fetchQuiz();
-  let questions = [],
+  var questions = [],
     answers = [],
     correct = [];
+
   for (let qnIndex = 0; qnIndex < quiz.length; qnIndex++) {
     const qns = quiz[qnIndex];
-    const qstn = qns.question;
-    questions.push(qstn);
+    let qn = qns.question;
+    questions.push(qn); // update "questions" array.
   }
+
   for (let qnIndex = 0; qnIndex < quiz.length; qnIndex++) {
     let choices = [];
+
     const qns = quiz[qnIndex];
-    const crct = qns.correct_answer;
-    const incrct = qns.incorrect_answers;
-    correct.push(crct);
-    choices.push(crct);
-    for (let i = 0; i < incrct.length; i++) {
-      choices.push(incrct[i]);
+    let crect = qns.correct_answer;
+    let increct = qns.incorrect_answers;
+    correct.push(crect); // update "correct" array.
+    choices.push(crect);
+
+    for (let i = 0; i < increct.length; i++) {
+      choices.push(increct[i]);
     }
+
     choices = Object.assign({}, choices);
-    answers.push(choices);
+    answers.push(choices); // update "answers" array.
   }
   return { questions, answers, correct };
 }
@@ -45,8 +50,10 @@ getData().then(
     let i = 0,
       score = 0;
     let question = document.querySelector("#game-question");
+    const game = document.querySelector("#game");
     const choices = document.querySelectorAll(".choices-text");
     const submit = document.querySelector(".submit-btn");
+
     question.innerHTML = `${i + 1}. ${res.questions[0]}`;
     let answerObj = res.answers[0];
     for (let j = 0; j < 4; j++) {
@@ -55,6 +62,12 @@ getData().then(
         j++;
       });
     }
+
+    // To prevent page-refresh on submit of each answer choice.
+    game.addEventListener("submit", (event) => {
+      event.preventDefault();
+      console.log(event.target.value);
+    });
 
     submit.addEventListener("click", () => {
       if (i < MAX_QUESTIONS - 1) {
@@ -70,6 +83,8 @@ getData().then(
           }
         } while (i < 1);
       }
+
+      // if()
     });
   },
   (err) => console.log(err)
