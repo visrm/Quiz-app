@@ -50,9 +50,11 @@ data.then(
     const CORRECT_BONUS = 5;
     const MAX_QUESTIONS = 12;
 
-    let selectedChoice = [];
-    let i = 0,
-      scoreCount = 0;
+    var selectedChoice = [];
+    var i = 0,
+      scoreCount = 0,
+      questionsCounter = 0;
+    // dom-manipulation variables
     let question = document.querySelector("#game-question");
     const game = document.querySelector("#game");
     const radios = document.querySelectorAll(".choice-radio");
@@ -63,6 +65,7 @@ data.then(
 
     question.innerHTML = `${i + 1}. ${res.questions[0]}`;
     let answerObj = res.answers[0];
+
     for (let j = 0; j < 4; j++) {
       radios.forEach((radio) => {
         radio.value = answerObj[j];
@@ -95,34 +98,43 @@ data.then(
           selectedChoice.push(radioChoices[0].value); // set default value of default selected radio button
         let chosenSelection =
           selectedChoice[selectedChoice.length - 1].toString();
+
+        // if the player choses the right answer
         if (chosenSelection == res.correct[i]) {
-          scoreCount += CORRECT_BONUS;
-          while (scoreCount <= MAX_QUESTIONS * CORRECT_BONUS) {
-            score.style.color = "#66cc22";
-            scoreCard.setAttribute(
-              "style",
-              "transform: scale(1.1);"
-            );
+          let MAX_SCORE = MAX_QUESTIONS * CORRECT_BONUS; // define maximum possible score
+
+          for (let idx = 1; idx <= 2; idx++) {
+            while (scoreCount <= MAX_SCORE && questionsCounter < 12) {
+              scoreCount += CORRECT_BONUS; // increment the score
+              score.style.color = "#66cc22";
+              scoreCard.setAttribute("style", "transform: scale(1.1);");
+              score.innerHTML = scoreCount;
+              setTimeout(() => {
+                score.style.color = "";
+                scoreCard.setAttribute("style", "");
+              }, 1000);
+              questionsCounter++;
+              break;
+            }
+            break;
+          }
+        } else {
+          while (questionsCounter < 12) {
+            scoreCount -= 1; // decrement the score
+            score.style.color = "#ff0f0f";
+            scoreCard.setAttribute("style", "transform: scale(1.1);");
             score.innerHTML = scoreCount;
             setTimeout(() => {
               score.style.color = "";
               scoreCard.setAttribute("style", "");
             }, 1000);
+            questionsCounter++;
             break;
           }
-          // for test purpose :
-          // console.info(`Correct Answer! Your score is now : ${score}`);
-        } else {
-          // for test purpose :
-          // console.info(
-          //   `Your choice: ${chosenSelection}, The Correct Answer is: ${res.correct[i]}`
-          // );
-          scoreCount += 0;
         }
       } else {
         window.alert("Select your answer");
       }
-
       selectedChoice.splice(0, selectedChoice.length);
 
       if (i < MAX_QUESTIONS - 1) {
@@ -145,11 +157,14 @@ data.then(
         } while (i < 1);
       } else return;
     });
+    console.log(i);
 
     submit.addEventListener("click", () => {
       var defaultRadioBtn = document.getElementById("ch1");
       defaultRadioBtn.checked = true; // set default radio button to "checked" state after submit
     });
+
+    // if ()
   },
   (err) => console.log(err)
 );
