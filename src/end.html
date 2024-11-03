@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Congratz!</title>
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <script src="./scripts/end.js"></script>
+  </head>
+  <body>
+    <section id="container">
+      <article id="home">
+        <hgroup>
+          <h3
+            style="display: grid; place-content: center; margin-bottom: 0"
+          >
+            score:
+          </h3>
+          <h1 id="finalScore">0</h1>
+        </hgroup>
+        <form>
+          <input name="username" id="username" placeholder="Username" />
+          <button
+            disabled
+            class="btn place-center"
+            id="saveScoreBtn"
+            onclick="saveHighScore(event)"
+          >
+            Save Score
+          </button>
+        </form>
+        <a class="btn place-center" href="./game.html">Play Again</a>
+        <a class="btn place-center" href="./index.html">Go Home</a>
+      </article>
+    </section>
+  </body>
+</html>

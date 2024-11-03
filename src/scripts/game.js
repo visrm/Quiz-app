@@ -102,7 +102,6 @@ data.then(
         // if the player choses the right answer
         if (chosenSelection == res.correct[i]) {
           let MAX_SCORE = MAX_QUESTIONS * CORRECT_BONUS; // define maximum possible score
-
           for (let idx = 1; idx <= 2; idx++) {
             while (scoreCount <= MAX_SCORE && questionsCounter < 12) {
               scoreCount += CORRECT_BONUS; // increment the score
@@ -119,7 +118,7 @@ data.then(
             break;
           }
         } else {
-          while (questionsCounter < 12) {
+          while (questionsCounter < MAX_QUESTIONS) {
             scoreCount -= 1; // decrement the score
             score.style.color = "#ff0f0f";
             scoreCard.setAttribute("style", "transform: scale(1.1);");
@@ -156,8 +155,15 @@ data.then(
           }
         } while (i < 1);
       } else return;
+      console.log(questionsCounter);
+      if (questionsCounter >= MAX_QUESTIONS) {
+        // if all questions have been attended
+        localStorage.setItem("recentScore", scoreCount);
+        setTimeout(() => {
+          return window.location.assign("/src/end.html");
+        }, 1000);
+      }
     });
-    console.log(i);
 
     submit.addEventListener("click", () => {
       var defaultRadioBtn = document.getElementById("ch1");

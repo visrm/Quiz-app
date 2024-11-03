@@ -21,7 +21,7 @@ h4 {
 h1 {
   font-size: 5.4rem;
   color: #56a5eb;
-  margin-bottom: 4.5rem;
+  margin-bottom: 4rem;
 }
 
 h2 {
@@ -38,6 +38,15 @@ h3 {
 a {
   display: block;
   text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Utilities */
@@ -57,6 +66,7 @@ a {
 }
 
 .btn {
+  width: 100%;
   min-height: 36px;
   max-width: 360px;
   border: 1px solid #56a5eb;
@@ -70,4 +80,20 @@ a {
 .place-center {
   display: grid;
   place-content: center;
+}
+
+#username {
+  display: block;
+  text-align: center;
+  min-height: 36px;
+  max-width: 360px;
+  margin: 0.5rem auto;
+  font-size: 12pt;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+
+  &::placeholder {
+    color: #aaa;
+  }
 }
