@@ -1,0 +1,42 @@
+table {
+  display: block;
+  max-width: 100%;
+  width: 40rem;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 2.5rem;
+}
+
+thead,
+tbody {
+  display: block;
+  height: auto;
+  width: 100%;
+  min-width: fit-content;
+  border: 1px solid;
+  font-size: 1.5rem;
+}
+
+tr {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-template-areas: "TableCell1 TableCell2 TableCell3";
+  height: 4rem;
+  place-items: center;
+}
+
+tr:nth-child(1) {
+  grid-area: TableCell1;
+}
+tr:nth-child(2) {
+  grid-area: TableCell2;
+}
+tr:nth-child(3) {
+  grid-area: TableCell3;
+}
+
+th,
+td {
+  padding: 0.75rem;
+}

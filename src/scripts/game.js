@@ -103,7 +103,7 @@ data.then(
         if (chosenSelection == res.correct[i]) {
           let MAX_SCORE = MAX_QUESTIONS * CORRECT_BONUS; // define maximum possible score
           for (let idx = 1; idx <= 2; idx++) {
-            while (scoreCount <= MAX_SCORE && questionsCounter < 12) {
+            while (scoreCount <= MAX_SCORE && questionsCounter < MAX_QUESTIONS) {
               scoreCount += CORRECT_BONUS; // increment the score
               score.style.color = "#66cc22";
               scoreCard.setAttribute("style", "transform: scale(1.1);");
@@ -154,9 +154,10 @@ data.then(
             });
           }
         } while (i < 1);
-      } else return;
+      }
+
       console.log(questionsCounter);
-      if (questionsCounter >= MAX_QUESTIONS) {
+      if (questionsCounter > MAX_QUESTIONS - 1) {
         // if all questions have been attended
         localStorage.setItem("recentScore", scoreCount);
         setTimeout(() => {
@@ -170,7 +171,6 @@ data.then(
       defaultRadioBtn.checked = true; // set default radio button to "checked" state after submit
     });
 
-    // if ()
   },
   (err) => console.log(err)
 );

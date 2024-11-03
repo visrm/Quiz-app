@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quick Quiz - Score</title>
     <link rel="stylesheet" type="text/css" href="./styles/style.css" />
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="./styles/score.css" />
+  </head>
+  <body>
+    <script src="./scripts/score.js"></script>
     <section id="container">
-
-      </section>
-</body>
+      <article id="home">
+        <h1 style="text-align: center">High Scores</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Username</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="score-list">
+          </tbody>
+        </table>
+        <a class="btn place-center" href="./index.html">Home</a>
+      </article>
+    </section>
+  </body>
 </html>
