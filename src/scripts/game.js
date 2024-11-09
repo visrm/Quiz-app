@@ -161,7 +161,7 @@ data.then(
         // if all questions have been attended
         localStorage.setItem("recentScore", scoreCount);
         setTimeout(() => {
-          return window.location.assign("/src/end.html");
+          return window.location.assign("./end.html");
         }, 1000);
       }
     });
